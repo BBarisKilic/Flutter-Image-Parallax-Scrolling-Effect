@@ -68,12 +68,29 @@ class HomePage extends StatelessWidget {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(15.0),
-                            child: Image.asset(
-                              _homePageController.paintings[i].imagePath ?? "",
-                              height: Get.height * 0.40,
-                              fit: BoxFit.cover,
+                            child: Obx(() {
+                              return Image.asset(
+                                _homePageController.paintings[i].imagePath
+                                    as String,
+                                height: Get.height * 0.40,
+                                fit: BoxFit.cover,
+                                alignment: Alignment(
+                                    -_homePageController.pageOffset.abs() + i,
+                                    0),
+                              );
+                            }),
+                          ),
+                          Positioned(
+                            left: 10,
+                            right: 10,
+                            bottom: 20,
+                            child: Text(
+                              _homePageController.paintings[i].name as String,
+                              style: kNormalTextStyle.copyWith(
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w300),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
