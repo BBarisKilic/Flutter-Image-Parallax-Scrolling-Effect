@@ -1,6 +1,6 @@
-//image paths
 import 'package:flutter/material.dart';
 
+//image paths
 const String kBGPath = "assets/images/vincent_bg.jpg";
 
 //texts

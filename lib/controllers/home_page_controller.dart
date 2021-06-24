@@ -6,17 +6,18 @@ import 'package:parallax_effect/models/paintings.dart';
 class HomePageController extends GetxController {
   var _paintings = <Paintings>[].obs;
   var _pageOffset = 0.0.obs;
-  late PageController pageController;
+  late PageController _pageController;
 
   List<Paintings> get paintings => _paintings;
   double get pageOffset => _pageOffset.value;
+  PageController get pageController => _pageController;
 
   @override
   void onInit() {
     super.onInit();
-    pageController = PageController(viewportFraction: 0.7);
-    pageController.addListener(() {
-      _pageOffset.value = pageController.page as double;
+    _pageController = PageController(viewportFraction: 0.7);
+    _pageController.addListener(() {
+      _pageOffset.value = _pageController.page as double;
     });
   }
 
@@ -28,8 +29,10 @@ class HomePageController extends GetxController {
 
   @override
   void dispose() {
-    pageController.removeListener(() {});
-    pageController.dispose();
+    _pageController.removeListener(() {
+      _pageOffset.value = _pageController.page as double;
+    });
+    _pageController.dispose();
     super.dispose();
   }
 
