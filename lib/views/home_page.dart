@@ -55,14 +55,13 @@ class HomePage extends StatelessWidget {
           ),
           Expanded(
             flex: 12,
-            child: SizedBox(
-              height: Get.height * 0.40,
-              child: PageView.builder(
-                itemCount: _homePageController.paintings.length,
-                controller: _homePageController.pageController,
-                itemBuilder: (context, i) {
-                  return Transform.scale(
-                    scale: 1,
+            child: PageView.builder(
+              itemCount: _homePageController.paintings.length,
+              controller: _homePageController.pageController,
+              itemBuilder: (context, i) {
+                return Transform.scale(
+                  scale: 1,
+                  child: Center(
                     child: Container(
                       padding: const EdgeInsets.only(right: 20.0),
                       child: Stack(
@@ -70,15 +69,17 @@ class HomePage extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(15.0),
                             child: Image.asset(
-                                _homePageController.paintings[i].imagePath ??
-                                    ""),
+                              _homePageController.paintings[i].imagePath ?? "",
+                              height: Get.height * 0.40,
+                              fit: BoxFit.cover,
+                            ),
                           )
                         ],
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
           ),
           const Expanded(
