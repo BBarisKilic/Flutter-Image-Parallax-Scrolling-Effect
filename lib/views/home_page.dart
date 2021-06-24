@@ -52,7 +52,9 @@ class HomePage extends StatelessWidget {
           ),
           Expanded(
             flex: 12,
-            child: const SizedBox(),
+            child: SizedBox(
+              height: Get.height * 0.40,
+            ),
           ),
           const Expanded(
             flex: 1,
