@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:parallax_effect/controllers/home_page_controller.dart';
 import 'package:parallax_effect/utilities/constants.dart';
 
 class HomePage extends StatelessWidget {
+  final HomePageController _homePageController = Get.put(HomePageController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +57,28 @@ class HomePage extends StatelessWidget {
             flex: 12,
             child: SizedBox(
               height: Get.height * 0.40,
+              child: PageView.builder(
+                itemCount: _homePageController.paintings.length,
+                controller: _homePageController.pageController,
+                itemBuilder: (context, i) {
+                  return Transform.scale(
+                    scale: 1,
+                    child: Container(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image.asset(
+                                _homePageController.paintings[i].imagePath ??
+                                    ""),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           const Expanded(
