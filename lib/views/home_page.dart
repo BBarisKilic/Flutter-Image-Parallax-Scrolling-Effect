@@ -72,47 +72,48 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  PageView buildPaintingPageView() {
-    return PageView.builder(
-      itemCount: _homePageController.paintings.length,
-      controller: _homePageController.pageController,
-      itemBuilder: (context, i) {
-        return Transform.scale(
-          scale: 1,
-          child: Center(
-            child: Container(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: Obx(() {
-                      return Image.asset(
-                        _homePageController.paintings[i].imagePath as String,
-                        height: Get.height * 0.40,
-                        fit: BoxFit.cover,
-                        alignment: Alignment(
-                            -_homePageController.pageOffset.abs() + i, 0),
-                      );
-                    }),
+  Obx buildPaintingPageView() {
+    return Obx(() => PageView.builder(
+          itemCount: _homePageController.paintings.length,
+          controller: _homePageController.pageController,
+          itemBuilder: (context, i) {
+            return Transform.scale(
+              scale: 1,
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15.0),
+                        child: Obx(() {
+                          return Image.asset(
+                            _homePageController.paintings[i].imagePath
+                                as String,
+                            height: Get.height * 0.40,
+                            fit: BoxFit.cover,
+                            alignment: Alignment(
+                                -_homePageController.pageOffset.abs() + i, 0),
+                          );
+                        }),
+                      ),
+                      Positioned(
+                        left: 10,
+                        right: 10,
+                        bottom: 20,
+                        child: Text(
+                          _homePageController.paintings[i].name as String,
+                          style: kNormalTextStyle.copyWith(
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w300),
+                        ),
+                      ),
+                    ],
                   ),
-                  Positioned(
-                    left: 10,
-                    right: 10,
-                    bottom: 20,
-                    child: Text(
-                      _homePageController.paintings[i].name as String,
-                      style: kNormalTextStyle.copyWith(
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w300),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        );
-      },
-    );
+            );
+          },
+        ));
   }
 }
